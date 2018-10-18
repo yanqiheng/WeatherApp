@@ -2,16 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--
+    dp: 密度无关像素；sp:字体
+    工具栏：新建立一个相对布局，并添加新的组件
+    match_parent: 控件大小与父布局一致;
+    wrap_content: 控件大小刚好包含里面的内同,大小由内容决定
+    fill_parent : API level8 以后被match_parent取代
+    Padding：为内边框，指该控件内部内容，如文本/图片距离该控件的边距
+    Margin ：为外边框，指该控件距离边父控件的边距
+    -->
+    <!-- gravity ：指定控件内文字的对齐方式 -->
 
-    //工具栏：新建立一个相对布局，并添加新的组件
-    //match_parent: 控件大小与父布局一致;wrap_content: 控件大小刚好包含里面的内同,大小由内容决定
-    //fill_parent:API level 8 以后被 match_parent 取代
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="45.0dip"
         android:background="#ffcd2626"
-        android:gravity="center_horizontal"> //gravity ：指定控件内文字的对齐方式
+        android:gravity="center_horizontal">
 
         <ImageView
             android:id="@+id/title_city_manager"
@@ -19,6 +26,7 @@
             android:layout_height="45dp"
             android:src="@drawable/title_city" />
 
+        <!-- layout_margin 指定该属性所在的控件距上下左右最近控件的最小值 -->
         <ImageView
             android:id="@+id/city_seperator"
             android:layout_width="1.0dp"
@@ -65,24 +73,24 @@
     </RelativeLayout>
 
 
-    //工具栏下方整个背景界面
+    <!-- 工具栏下方整个背景界面 -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/title"
         android:background="@drawable/biz_plugin_weather_shenzhen_bg"
-        android:orientation="vertical"> //vertical（垂直方向）
+        android:orientation="vertical">
+        <!-- vertical（垂直方向）-->
 
-        //今日天气信息大块
-
+        <!-- 今日天气信息大块 -->
         <RelativeLayout
             android:id="@+id/weather_today"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
-            //城市
 
+            <!-- 城市 -->
             <TextView
                 android:id="@+id/city"
                 android:layout_width="wrap_content"
@@ -94,8 +102,8 @@
                 android:text="北京"
                 android:textColor="@android:color/white"
                 android:textSize="40sp" />
-            //发布时间
 
+            <!-- 发布时间 -->
             <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
@@ -108,8 +116,8 @@
                 android:text="今天18:25发布"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
-            //湿度
 
+            <!-- 湿度 -->
             <TextView
                 android:id="@+id/humidity"
                 android:layout_width="wrap_content"
@@ -121,8 +129,8 @@
                 android:text="湿度:57%"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
-            //PM2.5信息块,新填一个线性布局
 
+            <!-- PM2.5信息块,新填一个线性布局 -->
             <LinearLayout
                 android:id="@+id/pm2_5_content"
                 android:layout_width="wrap_content"
@@ -131,8 +139,7 @@
                 android:layout_alignParentTop="true"
                 android:orientation="vertical">
 
-                //PM2.5详情
-
+                <!-- PM2.5详情 -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -147,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-                        <!-- PM2.5 -->
+
                         <TextView
                             android:id="@+id/pm2_5"
                             android:layout_width="wrap_content"
@@ -169,7 +176,6 @@
                     </LinearLayout>
 
                     <!-- PM2.5图片 -->
-
                     <ImageView
                         android:id="@+id/pm2_5_img"
                         android:layout_width="wrap_content"
@@ -179,7 +185,6 @@
                 </LinearLayout>
 
                 <!-- 污染等级(重度污染) -->
-
                 <TextView
                     android:id="@+id/pm2_5_quality"
                     android:layout_width="fill_parent"
@@ -193,8 +198,9 @@
 
         </RelativeLayout>
 
-        //今日天气信息块
+        <!-- 今日天气信息块 -->
         <RelativeLayout
+            android:id="@+id/today_weather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -251,40 +257,38 @@
                 android:text="微风"
                 android:textColor="@android:color/white"
                 android:textSize="20.0sp" />
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="5.0dip"
-                android:layout_marginRight="10.0dip"
-                >
-                <TextView
-                    android:id="@+id/Now_temperature_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:text="当前温度"
-                    android:textSize="30dp"
-                    android:layout_marginRight="5dp"
-                    android:textColor="@android:color/white"
-                    />
-                <TextView
-                    android:id="@+id/Now_temperature"
-                    android:layout_below="@+id/Now_temperature_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="23℃"
-                    android:textSize="50dp"
-                    android:layout_marginRight="10dip"
-                    android:singleLine="true"
-                    android:textColor="@android:color/white"
-
-                    />
-            </RelativeLayout>
+            <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginTop="5.0dip"-->
+                <!--android:layout_marginRight="10.0dip"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:id="@+id/Now_temperature_name"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:text="当前温度"-->
+                    <!--android:textSize="30dp"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/Now_temperature"-->
+                    <!--android:layout_below="@+id/Now_temperature_name"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:text="23℃"-->
+                    <!--android:textSize="50dp"-->
+                    <!--android:layout_marginRight="10dip"-->
+                    <!--android:singleLine="true"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--/>-->
+            <!--</RelativeLayout>-->
 
         </RelativeLayout>
 
