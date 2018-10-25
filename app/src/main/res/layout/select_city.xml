@@ -6,7 +6,8 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="45.0dip"
-        android:background="#ffcd2626" >
+        android:background="#ffcd2626"
+        android:id="@+id/show_city">
         <TextView
             android:id="@+id/title_name"
             android:layout_width="fill_parent"
@@ -35,6 +36,15 @@
             android:gravity="center" />
 
     </RelativeLayout>
+
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_view"
+            android:layout_below="@+id/show_city">
+    </ListView>
+
+
 
 
 </RelativeLayout>

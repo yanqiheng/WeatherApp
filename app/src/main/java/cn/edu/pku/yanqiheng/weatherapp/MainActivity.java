@@ -39,7 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private ImageView mCitySelect;
 
     // 主线程接受后进行更新
-    private  Handler mHandler = new Handler() {
+    private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case UPDATE_TODAY_WEATHER:
@@ -80,7 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
         if (view.getId() == R.id.title_update_btn){
             SharedPreferences sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
-            String cityCode = sharedPreferences.getString("main_city_code","101010100");
+            String cityCode = sharedPreferences.getString("cityCode","101010100");
             Log.d("myWeather",cityCode);
             if (NetUtil.getNetworkState(this) != NetUtil.NETWORN_NONE) {
                 Log.d("myWeather", "网络OK");
@@ -136,9 +136,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     }
                     String responseStr=response.toString();
                     Log.d("myWeather", responseStr);
-                    //在获取网络数据后，调用解析函数，返回新的对象
+                    // 在获取网络数据后，调用解析函数，返回新的对象
                     todayWeather=parseXML(responseStr);
-                    //消息机制传递给主线程
+                    // 消息机制传递给主线程
                     if(todayWeather!=null){
                         Log.d("myWeather",todayWeather.toString());
                         Message msg =new Message();

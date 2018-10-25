@@ -19,10 +19,7 @@ public class MyApplication extends Application {
     private static final String TAG="MyAPP";
     private static MyApplication mApplication;
     private CityDB mCityDB;
-    private List<City> mCityList;
-
-
-
+    public List<City> mCityList;
 
     @Override
     public void onCreate() {

@@ -18,12 +18,12 @@ public class CityDB {
     private static final String CITY_TABLE_NAME = "city";
     private SQLiteDatabase db;
 
-    //构造函数
+    // 构造函数
     public CityDB(Context context, String path) {
         db = context.openOrCreateDatabase(path, Context.MODE_PRIVATE, null);
     }
 
-    //对数据库进行查询操作,把数据库的内容存入到List当中
+    // 对数据库进行查询操作,把数据库的内容存入到List当中
     public List<City> getAllCity(){
         List<City> list = new ArrayList<City>();
         Cursor c = db.rawQuery("SELECT * from " + CITY_TABLE_NAME, null);
