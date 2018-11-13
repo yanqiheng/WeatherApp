@@ -13,6 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -42,6 +47,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private ProgressBar mUpdateProgressBar;
     String newCityCode;
     String newCityName;
+    public LocationClient mLocationClient;
+    private MyLocationListener myListener=new MyLocationListener();
 
     // 主线程接受后进行更新
     private Handler mHandler = new Handler() {
@@ -70,11 +77,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
         mCitySelect.setOnClickListener(this);
         mUpdateProgressBar=(ProgressBar)findViewById(R.id.title_update_progress);
 
+
         if (NetUtil.getNetworkState(this) != NetUtil.NETWORN_NONE)
             Toast.makeText(MainActivity.this,"网络连接正常", Toast.LENGTH_LONG).show();
         else
             Toast.makeText(MainActivity.this,"网络挂了！", Toast.LENGTH_LONG).show();
         initView();
+        startLocate();//查询用户位置的函数
 
     }
 
@@ -409,6 +418,37 @@ public class MainActivity extends Activity implements View.OnClickListener{
         wind3.setText("风力"+todayWeather.getFengli3());
         Toast.makeText(MainActivity.this,"当前城市更新成功！",Toast.LENGTH_SHORT).show();
     }
+
+    class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation bdLocation) {
+            String cityName = bdLocation.getCity();
+            Log.d("Locate", cityName);
+
+        }
+    }
+
+    private void startLocate() {
+        /**
+         * 百度定位
+         * */
+        mLocationClient = new LocationClient(getApplicationContext());//创建一个用户位置代理的类
+        mLocationClient.registerLocationListener(myListener);//注册其监听事件
+        LocationClientOption option = new LocationClientOption();//设置一个用户位置代理的选项类
+        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);//设置该模式为省电的模式
+        option.setCoorType("bd0911");//设置坐标的类型
+        option.setOpenGps(true);//设置是否打开GPS
+        option.setLocationNotify(true);//设置是否当GPS有效时按照1S/1次频率输出GPS结果
+        option.setIsNeedAddress(true);//，设置是否需要地址信息，默认不需要！！注意，这个很重要，我们是需要返回地址的
+        option.setIsNeedLocationDescribe(true);//设置是否需要位置语义化结果
+        option.setIsNeedLocationPoiList(true);//设置是否需要POI结果
+        option.setIgnoreKillProcess(false);//默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
+        mLocationClient.setLocOption(option);//将这些选项加载到用户位置代理类
+        mLocationClient.start();//开始位置代理
+    }
+
+
+
 
 
 
